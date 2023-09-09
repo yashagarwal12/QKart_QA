@@ -426,8 +426,8 @@ public class QkartSanity {
         homePage.addProductToCart("Stylecon 9 Seater RHS Sofa Set");
         Thread.sleep(3000);
 
-        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set", 10);
-
+        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set ", 10);
+        Thread.sleep(2000);
         homePage.clickCheckout();
 
         Checkout checkoutPage = new Checkout(driver);
@@ -458,7 +458,7 @@ public class QkartSanity {
 
         try {
             // Execute Test Case 1
-             totalTests += 1;
+            totalTests += 1;
              status = TestCase01(driver);
             if (status) {
                 passedTests += 1;
@@ -510,14 +510,14 @@ public class QkartSanity {
 
             // System.out.println("");
 
-            // Execute Test Case 7
-            // totalTests += 1;
-            // status = TestCase07(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+           // Execute Test Case 7
+         totalTests += 1;
+            status = TestCase07(driver);
+            if (status) {
+            passedTests += 1;
+             }
 
-            // System.out.println("");
+            System.out.println("");
 
 
         } catch (Exception e) {

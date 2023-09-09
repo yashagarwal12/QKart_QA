@@ -79,7 +79,11 @@ public class SearchResult {
              * the element is "SIZE CHART". If the text "SIZE CHART" matches for the
              * element, set status = true , else set to false
              */
-            status=parentElement.findElement(By.xpath("//div[@class='MuiCardContent-root css-1qw96cp']/button")).isDisplayed();
+            WebElement sizeChart=parentElement.findElement(By.xpath("//div[@class='MuiCardContent-root css-1qw96cp']/button"));
+           if(sizeChart.isDisplayed()){
+                if(sizeChart.getText().trim().equals("SIZE CHART"))
+                status=true;
+           }
             return status;
         } catch (Exception e) {
             return status;
@@ -109,7 +113,7 @@ public class SearchResult {
 
             List<WebElement> actualTableHeaders=table.findElements(By.xpath("//thead/tr/th"));
             for(int i=0;i<expectedTableHeaders.size();i++){
-                System.out.println(actualTableHeaders.get(i).getText()+"-->"+expectedTableHeaders.get(i));
+               // System.out.println(actualTableHeaders.get(i).getText()+"-->"+expectedTableHeaders.get(i));
                if(!actualTableHeaders.get(i).getText().trim().equals(expectedTableHeaders.get(i))){
                 status=false;
                 break;
@@ -121,7 +125,7 @@ public class SearchResult {
                 List<WebElement> td=row.get(i).findElements(By.tagName("td"));
                 for(int j=0;j<expectedTableBody.get(i).size();j++){
                    
-                   System.out.println(td.get(j).getText()+"-->"+expectedTableBody.get(i).get(j));
+                  // System.out.println(td.get(j).getText()+"-->"+expectedTableBody.get(i).get(j));
                    if(!td.get(j).getText().trim().equals(expectedTableBody.get(i).get(j))){
                     status=false;
                     break;

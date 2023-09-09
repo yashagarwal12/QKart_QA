@@ -171,9 +171,8 @@ public class Home {
         String qnt= parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/div")).getText();
           
          int int_qnt=Integer.parseInt(qnt);
-         System.out.println(int_qnt);
-
-         WebElement btn1= parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/button[1]"));
+         
+        WebElement btn1= parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/button[1]"));
          WebElement btn2=parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/button[2]"));
          if(quantity<int_qnt){
             for(int j=1;j<=int_qnt-quantity;j++){    
