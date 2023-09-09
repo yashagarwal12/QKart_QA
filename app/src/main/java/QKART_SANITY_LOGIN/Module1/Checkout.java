@@ -32,7 +32,12 @@ public class Checkout {
              * Click on the "Add new address" button, enter the addressString in the address
              * text box and click on the "ADD" button to save the address
              */
-            return false;
+           WebElement parent=driver.findElement(By.xpath("//*[@class='shipping-container MuiBox-root css-vooagt']"));
+            parent.findElement(By.xpath("//button[@id='add-new-btn']")).click();
+            parent.findElement(By.xpath("//textarea[@placeholder='Enter your complete address']")).sendKeys(addresString);
+            Thread.sleep(2000);
+            parent.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-177pwqq']")).click();
+            return true;
         } catch (Exception e) {
             System.out.println("Exception occurred while entering address: " + e.getMessage());
             return false;
@@ -49,9 +54,14 @@ public class Checkout {
             /*
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
-             */
+             */if(driver.findElement(By.name("address")).isEnabled()){
+                driver.findElement(By.name("address")).click();
+                return true;
+             }
+             else{
             System.out.println("Unable to find the given address");
             return false;
+             }
         } catch (Exception e) {
             System.out.println("Exception Occurred while selecting the given address: " + e.getMessage());
             return false;
@@ -66,7 +76,8 @@ public class Checkout {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find the "PLACE ORDER" button and click on it
-            return false;
+            driver.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-177pwqq']")).click();
+            return true;
 
         } catch (Exception e) {
             System.out.println("Exception while clicking on PLACE ORDER: " + e.getMessage());

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -97,6 +98,7 @@ public class Home {
      */
     public Boolean addProductToCart(String productName) {
         try {
+            boolean status=false;
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through each product on the page to find the WebElement corresponding
@@ -106,8 +108,24 @@ public class Home {
              * 
              * Return true if these operations succeeds
              */
-            System.out.println("Unable to find the given product");
-            return false;
+            Thread.sleep(2000);
+            List<WebElement> element= driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-md-3 css-sycj1h']"));
+            for(WebElement e:element){
+            String text=e.findElement(By.xpath("//div[@class='MuiCardContent-root css-1qw96cp']/p")).getText();
+            if(text.trim().equals(productName)){
+             WebElement product=e.findElement(By.xpath("//*[@class='MuiCardActions-root MuiCardActions-spacing card-actions css-3zukih']/button"));
+                
+                Actions action=new Actions(driver);
+                action.moveToElement(product).click(product).perform();
+               status= true;
+             }
+             else{
+                System.out.println("Unable to find the given product");
+                status= false;
+                }
+            
+            }
+           return status;
         } catch (Exception e) {
             System.out.println("Exception while performing add to cart: " + e.getMessage());
             return false;
@@ -122,6 +140,8 @@ public class Home {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find and click on the the Checkout button
+        driver.findElement(By.xpath("//div[@class='cart MuiBox-root css-0']/div[@class='cart-footer MuiBox-root css-1bvc4cc']/button")).click();
+        status=true;
             return status;
         } catch (Exception e) {
             System.out.println("Exception while clicking on Checkout: " + e.getMessage());
@@ -135,6 +155,8 @@ public class Home {
      */
     public Boolean changeProductQuantityinCart(String productName, int quantity) {
         try {
+            boolean status=false;
+            Actions action=new Actions(driver);
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
             // Find the item on the cart with the matching productName
@@ -142,9 +164,40 @@ public class Home {
             // Increment or decrement the quantity of the matching product until the current
             // quantity is reached (Note: Keep a look out when then input quantity is 0,
             // here we need to remove the item completely from the cart)
+           
+        WebElement parent=driver.findElement(By.xpath("//div[@class='cart MuiBox-root css-0']"));
+        WebElement child=parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']"));
+        if(child.isDisplayed()){
+        String qnt= parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/div")).getText();
+          
+         int int_qnt=Integer.parseInt(qnt);
+         System.out.println(int_qnt);
 
-
+         WebElement btn1= parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/button[1]"));
+         WebElement btn2=parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']/following-sibling::div/div[1]/button[2]"));
+         if(quantity<int_qnt){
+            for(int j=1;j<=int_qnt-quantity;j++){    
+            action.moveToElement(btn1).click(btn1).perform();
+            Thread.sleep(1000);
+            }
+            return true;
+        }
+            else if(int_qnt<quantity){
+            for(int j=1;j<=quantity-int_qnt;j++){   
+                action.moveToElement(btn2).click(btn2).perform();
+                Thread.sleep(1000);
+            }
+            return true;
+        }
+            else{
+            return true;
+            }
+           
+        }
+        else{
             return false;
+        }
+            
         } catch (Exception e) {
             if (quantity == 0)
                 return true;

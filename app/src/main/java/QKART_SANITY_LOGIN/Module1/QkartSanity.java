@@ -294,9 +294,11 @@ public class QkartSanity {
         homePage.addProductToCart("Tan Leatherette Weekender Duffle");
 
         // Click on the checkout button
+        Thread.sleep(2000);
         homePage.clickCheckout();
 
         // Add a new address on the Checkout page and select it
+        Thread.sleep(2000);
         Checkout checkoutPage = new Checkout(driver);
         checkoutPage.addNewAddress("Addr line 1 addr Line 2 addr line 3");
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
@@ -332,21 +334,42 @@ public class QkartSanity {
         // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
         // TODO: Register a new user
+       
+        registration.navigateToRegisterPage();
 
+        status = registration.registerUser("testUser", "abc@123", true);
+        if (!status) {
+            logStatus("TestCase 5", "Test Case Failure. Happy Flow Test Failed", "FAIL");
+        }
+        lastGeneratedUserName=registration.lastGeneratedUsername;
         // TODO: Login using the newly registed user
+      
+       login.navigateToLoginPage();
 
+       status = login.PerformLogin(lastGeneratedUserName, "abc@123");
+       if (!status) {
+           logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
+           logStatus("End TestCase", "Test Case 5: Happy Flow Test Failed : ", status ? "PASS" : "FAIL");
+       }
+    
         // TODO: Add "Xtend Smart Watch" to cart
+        status=homePage.searchForProduct("watch");
+        homePage.addProductToCart("Xtend Smart Watch");
 
         // TODO: Add "Yarine Floor Lamp" to cart
-
+        status=homePage.searchForProduct("lamp");
+        homePage.addProductToCart("Yarine Floor Lamp");
+        Thread.sleep(1000);
         // update watch quantity to 2
-        homePage.changeProductQuantityinCart("Xtend Smart Watch", 2);
-
+        homePage.changeProductQuantityinCart("Xtend Smart Watch", 3);
+        Thread.sleep(2000);
         // update table lamp quantity to 0
         homePage.changeProductQuantityinCart("Yarine Floor Lamp", 0);
-
+        Thread.sleep(2000);
         // update watch quantity again to 1
         homePage.changeProductQuantityinCart("Xtend Smart Watch", 1);
+        Thread.sleep(2000);
+    
 
         homePage.clickCheckout();
 
@@ -435,7 +458,7 @@ public class QkartSanity {
 
         try {
             // Execute Test Case 1
-            /*  totalTests += 1;
+             totalTests += 1;
              status = TestCase01(driver);
             if (status) {
                 passedTests += 1;
@@ -459,7 +482,7 @@ public class QkartSanity {
              }
 
             System.out.println("");
-*/
+
             // Execute Test Case 4
             totalTests += 1;
             status = TestCase04(driver);
@@ -470,20 +493,20 @@ public class QkartSanity {
             System.out.println("");
 
             // Execute Test Case 5
-            // totalTests += 1;
-            // status = TestCase05(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+            totalTests += 1;
+            status = TestCase05(driver);
+            if (status) {
+             passedTests += 1;
+             }
 
             // System.out.println("");
 
             // Execute Test Case 6
-            // totalTests += 1;
-            // status = TestCase06(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+            totalTests += 1;
+            status = TestCase06(driver);
+            if (status) {
+            passedTests += 1;
+            }
 
             // System.out.println("");
 
