@@ -53,13 +53,13 @@ public class SearchResult {
      */
     public Boolean closeSizeChart(WebDriver driver) {
         try {
-            //Thread.sleep(2000);
+            Thread.sleep(2000);
             Actions action = new Actions(driver);
 
             // Clicking on "ESC" key closes the size chart modal
             action.sendKeys(Keys.ESCAPE);
             action.perform();
-            //Thread.sleep(2000);
+            Thread.sleep(2000);
             return true;
         } catch (Exception e) {
             System.out.println("Exception while closing the size chart: " + e.getMessage());

@@ -35,14 +35,9 @@ public class Checkout {
            WebElement parent=driver.findElement(By.xpath("//*[@class='shipping-container MuiBox-root css-vooagt']"));
             parent.findElement(By.xpath("//button[@id='add-new-btn']")).click();
             parent.findElement(By.xpath("//textarea[@placeholder='Enter your complete address']")).sendKeys(addresString);
-            //Thread.sleep(2000);
-            WebDriverWait wait=new WebDriverWait(driver,3);
-            
+            Thread.sleep(2000);
             parent.findElement(By.xpath("//*[@class='MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-177pwqq']")).click();
-            wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@name='address']//following::p[1]"), addresString));
-        
             return true;
-           
         } catch (Exception e) {
             System.out.println("Exception occurred while entering address: " + e.getMessage());
             return false;
@@ -55,12 +50,11 @@ public class Checkout {
      */
     public Boolean selectAddress(String addressToSelect) {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
-             */
-
-            if(driver.findElement(By.name("address")).isEnabled()){
+             */if(driver.findElement(By.name("address")).isEnabled()){
                 driver.findElement(By.name("address")).click();
                 return true;
              }
@@ -72,6 +66,7 @@ public class Checkout {
             System.out.println("Exception Occurred while selecting the given address: " + e.getMessage());
             return false;
         }
+
     }
 
     /*
@@ -88,7 +83,6 @@ public class Checkout {
             System.out.println("Exception while clicking on PLACE ORDER: " + e.getMessage());
             return false;
         }
-    
     }
 
     /*
