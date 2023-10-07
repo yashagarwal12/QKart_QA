@@ -718,7 +718,7 @@ public static boolean TestCase11(RemoteWebDriver driver, int i, int j) throws In
 
         driver.switchTo().parentFrame();
         status=!driver.getCurrentUrl().equals(baseURL);
-        logStatus("Test Step", "Back to Thanks Page: ", status?"PASS":"FAIL");
+        logStatus("Test Step", "Back to Parent Frame: ", status?"PASS":"FAIL");
 
         driver.get(baseURL);
         Thread.sleep(3000);
@@ -730,7 +730,7 @@ public static boolean TestCase11(RemoteWebDriver driver, int i, int j) throws In
        // logStatus("Test Step", "Buy Now button is clickable: ", status?"PASS":"FAIL");
         driver.switchTo().parentFrame();
         status=!driver.getCurrentUrl().equals(baseURL);
-        logStatus("Test Step", "Back to Thanks Page: ", status?"PASS":"FAIL");
+        logStatus("Test Step", "Back to Parent Frame: ", status?"PASS":"FAIL");
 
         driver.get(baseURL);
         Thread.sleep(3000);
