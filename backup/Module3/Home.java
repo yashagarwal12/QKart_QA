@@ -102,16 +102,6 @@ public class Home {
     public Boolean addProductToCart(String productName) {
         try {
             boolean status=false;
-            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
-            /*
-             * Iterate through each product on the page to find the WebElement corresponding
-             * to the matching productName
-             * 
-             * Click on the "ADD TO CART" button for that element
-             * 
-             * Return true if these operations succeeds
-             */
-            //Thread.sleep(2000);
             List<WebElement> element= driver.findElements(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-md-3 css-sycj1h']"));
             for(WebElement e:element){
             String text=e.findElement(By.xpath("//div[@class='MuiCardContent-root css-1qw96cp']/p")).getText();
@@ -162,14 +152,6 @@ public class Home {
         try {
             boolean status=false;
             Actions action=new Actions(driver);
-            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
-
-            // Find the item on the cart with the matching productName
-
-            // Increment or decrement the quantity of the matching product until the current
-            // quantity is reached (Note: Keep a look out when then input quantity is 0,
-            // here we need to remove the item completely from the cart)
-           
         WebElement parent=driver.findElement(By.xpath("//div[@class='cart MuiBox-root css-0']"));
         WebElement child=parent.findElement(By.xpath("//div[@class='MuiBox-root css-zgtx0t']/div[@class='MuiBox-root css-1gjj37g']/div[text()='"+productName+"']"));
         if(child.isDisplayed()){
